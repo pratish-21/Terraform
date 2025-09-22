@@ -1,11 +1,11 @@
 resource "azurerm_resource_group" "example1" {
   name     = "${var.environment}-resources"
-  location = var.allowed-locations[1]
+  location = var.allowed-locations[0]
 }
 
 resource "azurerm_virtual_network" "main" {
   name                = "${var.environment}-network"
-  address_space       = ["10.0.0.0/16"]
+  address_space       = [element(var.network,0)]
   location            = azurerm_resource_group.example1.location
   resource_group_name = azurerm_resource_group.example1.name
 }
@@ -14,7 +14,7 @@ resource "azurerm_subnet" "internal" {
   name                 = "internal"
   resource_group_name  = azurerm_resource_group.example1.name
   virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.2.0/24"]
+  address_prefixes     = ["${element(var.network,1)}/${element(var.network,2)}"]
 }
 
 resource "azurerm_network_interface" "main" {
@@ -64,6 +64,8 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = false
   }
   tags = {
-    environment = var.environment
+    environment = var.allowed-tags["environment"]
+    managed_by = var.allowed-tags["managed_by"]
+    department = var.allowed-tags["department"]
   }
 }

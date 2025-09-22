@@ -19,3 +19,18 @@ variable "allowed-locations"{
     description = "locations"
     default = [ "West Europe" , "North Europe" , "East US" ]
 }
+variable "allowed-tags"{
+    type = map(string)
+    description = "tags to apply to the resources"
+    default = {
+        "environment" = "staging"
+        "managed_by" = "terraform"
+        "department" = "devops"
+    }
+}
+
+variable "network"{
+    type = tuple([string, string, number])
+    description = "tags to apply to network"
+    default = ["10.0.0.0/16", "10.0.4.0", 24]
+}
