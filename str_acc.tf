@@ -14,8 +14,8 @@ resource "azurerm_storage_account" "example" {
 
 
 resource "azurerm_storage_account" "example" {
-  foreach = var.sname
-  name                     = var.sname[each.value]
+  for_each = var.sname
+  name                     = each.value
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"

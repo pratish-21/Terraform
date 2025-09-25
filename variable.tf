@@ -60,7 +60,7 @@ variable "vm"{
 }
 
 variable "sname"{
-    type = list(string)
+    type = set(string)
     description = "storage account name"
     default = ["pratishjangam1", "pratishjangam2", "pratishjangam3"]
 }
