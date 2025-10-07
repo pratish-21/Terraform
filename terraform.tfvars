@@ -1,2 +1,2 @@
 #key value pairs
-environment = "demo"
+environment = "dev"

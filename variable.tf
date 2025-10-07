@@ -64,3 +64,8 @@ variable "sname"{
     description = "storage account name"
     default = ["pratishjangam1", "pratishjangam2", "pratishjangam3"]
 }
+variable "location"{
+    type = string
+    description = "location"
+    default = "West Europe"
+}
